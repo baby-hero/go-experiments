@@ -1,0 +1,47 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Go build output
+/build/
+/bin/
+/dist/
+*.log
+
+# Dependency directories (comment out if you use vendoring)
+/vendor/
+
+# Go workspace file (Go 1.18+)
+go.work
+go.work.sum
+
+# Test binary output
+*.coverprofile
+
+# IDE/editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Tools
+.air
+.env
+.env.*
+*.local
+
+# Protobuf / gRPC generated files (optional, if you regenerate every time)
+*.pb.go
+*.pb.gw.go
+
+# Cache
+.cache/
