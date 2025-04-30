@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"unicode/utf8"
 )
 
 type Animal struct {
@@ -11,37 +10,6 @@ type Animal struct {
 
 func (*Animal) addFloat(x float32, y float32) float32 {
 	return x + y
-}
-
-func testPointer() {
-	var x int = 1
-	var y int
-	var ip *int
-
-	ip = &x
-	y = *ip
-
-	fmt.Println(x, y, ip)
-	x = 2
-	fmt.Println(x, y, ip)
-
-	ptr := new(int) // pointer to int
-	fmt.Println(ptr, *ptr)
-	*ptr = 1
-	fmt.Println(ptr, *ptr)
-
-	ptrStr := new(string)
-	fmt.Println(ptrStr, "("+*ptrStr+")")
-	*ptrStr = "test"
-	fmt.Println(ptrStr, *ptrStr)
-}
-
-func testString(s string) {
-	fmt.Println("testString", s)
-	fmt.Println(len(s))                    // prints the number of bytes (a byte = 8 bit ~ a character)
-	fmt.Println(utf8.RuneCountInString(s)) // prints the number of runes (characters)
-	// In Go, a rune is an alias for int32 and represents a Unicode code point.
-	// It's used to handle characters beyond basic ASCII, especially in UTF-8 encoded strings.
 }
 
 func main() {
@@ -78,23 +46,15 @@ func main() {
 	}
 
 	// 6. Pointer
-	testPointer()
+	TestPointer()
 
 	// 7. String
 	// In Go, the default string encoding is UTF-8 (8 bits per character).
-	s := "こんにちは" // Japanese for "Hello" (unicode)
-	testString(s)
-	s = "Hello" // English (ASCII)
-	testString(s)
+	TestString()
 
-	s = "café"
-	fmt.Println(s, len(s)) // 5 bytes: 'c','a','f','é' (é is 2 bytes in UTF-8)
+	// 8. Array
+	TestArray()
 
-	for i, r := range s {
-		fmt.Printf("%d: %c (%U)\n", i, r, r)
-	}
-	s = "🐍Go"
-	runes := []rune(s)
-	fmt.Println(s, len(runes)) // 3 (🐍, G, o)
-	fmt.Println(s, len(s))
+	// 9 . Slice
+	TestSlice()
 }
