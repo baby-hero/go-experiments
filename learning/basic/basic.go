@@ -57,4 +57,7 @@ func main() {
 
 	// 9 . Slice
 	TestSlice()
+
+	// 10. Map
+	TestMap()
 }
