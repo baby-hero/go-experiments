@@ -55,3 +55,7 @@ func (s *userService) UpdateUser(ctx context.Context, id uint, input models.Upda
 func (s *userService) DeleteUser(ctx context.Context, id uint) error {
 	return s.userRepo.Delete(ctx, id)
 }
+
+func (s *userService) ListUsers(ctx context.Context) ([]*models.User, error) {
+	return s.userRepo.FindAll(ctx)
+}
