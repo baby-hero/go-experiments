@@ -51,3 +51,7 @@ func (s *userService) UpdateUser(ctx context.Context, id uint, input models.Upda
 	}
 	return s.userRepo.Update(ctx, user)
 }
+
+func (s *userService) DeleteUser(ctx context.Context, id uint) error {
+	return s.userRepo.Delete(ctx, id)
+}
