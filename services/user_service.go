@@ -59,3 +59,7 @@ func (s *userService) DeleteUser(ctx context.Context, id uint) error {
 func (s *userService) ListUsers(ctx context.Context) ([]*models.User, error) {
 	return s.userRepo.FindAll(ctx)
 }
+
+func (s *userService) GetUserByEmail(ctx context.Context, email string) (*models.User, error) {
+	return s.userRepo.FindByEmail(ctx, email)
+}
