@@ -63,3 +63,7 @@ func (s *userService) ListUsers(ctx context.Context) ([]*models.User, error) {
 func (s *userService) GetUserByEmail(ctx context.Context, email string) (*models.User, error) {
 	return s.userRepo.FindByEmail(ctx, email)
 }
+
+func (s *userService) GetUserByToken(ctx context.Context, token string) (*models.User, error) {
+	return s.userRepo.FindByToken(ctx, token)
+}
