@@ -41,3 +41,8 @@ func (s *CustomerService) UpdateCustomer(ctx context.Context, customer *models.C
 func (s *CustomerService) DeleteCustomer(ctx context.Context, id uint) error {
 	return s.repo.Delete(ctx, id)
 }
+
+// Get all customers
+func (s *CustomerService) GetAllCustomers(ctx context.Context) ([]*models.Customer, error) {
+	return s.repo.GetAll(ctx)
+}
