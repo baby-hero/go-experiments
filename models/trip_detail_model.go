@@ -15,41 +15,46 @@ type GetTripFinanceDetailsRequest struct {
 	Year           string
 }
 
-func validateTripIds(tripIds []int64) string {
-	if len(tripIds) > 100 {
+func (params *GetTripFinanceDetailsRequest) Validate() string {
+	if params.TripIDs == nil {
+		return "trip_ids parse error, please check"
+	}
+
+	if len(params.TripIDs) > 100 {
 		return "trip_ids size can not be more than 100"
 	}
-	return ""
-}
 
-func validateTimeRanges(startTime int64, endTime int64) string {
-	if startTime <= 0 {
+	if len(params.TripIDs) > 0 {
+		// search by trip_ids
+		return ""
+	}
+
+	if params.StartTime <= 0 {
 		return "start_time is required"
 	}
-	if endTime <= 0 {
+	if params.EndTime <= 0 {
 		return "end_time is required"
 	}
 
-	if (endTime - startTime) > (24 * 3600 * 30) {
+	if (params.EndTime - params.StartTime) > (24 * 3600 * 30) {
 		return "end_time - start_time should be less than 30 days"
 	}
 
-	return ""
-}
-
-func (params *GetTripFinanceDetailsRequest) Validate() string {
-	if len(params.TripIDs) > 0 {
-		return validateTripIds(params.TripIDs)
+	if params.DriverId > 0 {
+		// search by driver_id
+		return ""
 	}
-	// start_time and end_time are required
-	return validateTimeRanges(params.StartTime, params.EndTime)
-}
 
-func (params *GetTripFinanceDetailsRequest) ValidateForExportCSV() string {
-	if len(params.TripIDs) > 0 {
-		// if trip_ids exists, only validate trip_ids
-		return validateTripIds(params.TripIDs)
+	if params.VehicleType >= 0 {
+		// search by vehicle_type
+		return ""
 	}
-	// start_time and end_time are required
-	return validateTimeRanges(params.StartTime, params.EndTime)
+
+	if params.PaymentMethod >= 0 {
+		// search by payment_method
+		return ""
+	}
+
+	// The 'end_trip_time' parameter must be combined with at least one other parameter to perform a search
+	return "end_trip_time must be combined with at least one other parameter to perform a search"
 }
