@@ -1,6 +1,8 @@
 package models
 
 import (
+	"fmt"
+	"net/mail"
 	"time"
 
 	"gorm.io/gorm"
@@ -15,4 +17,14 @@ type Customer struct {
 	CreatedAt time.Time      `json:"created_at"`
 	UpdatedAt time.Time      `json:"updated_at"`
 	DeletedAt gorm.DeletedAt `gorm:"index" json:"-"`
+}
+
+func (c *Customer) Validate() error {
+	if c.FullName == "" {
+		return fmt.Errorf("full name is required")
+	}
+	if _, err := mail.ParseAddress(c.Email); err != nil {
+		return fmt.Errorf("invalid email format")
+	}
+	return nil
 }
